@@ -7,7 +7,7 @@ import slackbot.settings
 import pyjpbot
 
 def main():
-    happylogging.initlog(syslog='/var/run/syslog', facility='syslog')   
+    happylogging.initlog(syslog='/dev/log', facility='syslog')   
     slackbot.settings.API_TOKEN = os.environ['PYTHONJP_SLACKBOT_KEY']
 
     pyjpbot.init()
