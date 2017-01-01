@@ -2,15 +2,14 @@ from . import session
 from . models import *
 
 from slackbot.bot import listen_to
-import re
 
-@listen_to('^(\+\+\+|\-\-\-)(\w+)$')
-def add_plusminus(message, p, name):
+@listen_to(r'(\w+)(\+{2,}|\-{2,})$')
+def add_plusminus(message, name, p):
     f = message._get_user_id()
-    if p == '+++':
-        n = 1
+    if p[0] == '+':
+        n = len(p)-1
     else:
-        n = -1
+        n = -1*(len(p)-1)
 
     p = PlusMinus(pointto=name, pointfrom=f, point=n)
     session.add(p)
